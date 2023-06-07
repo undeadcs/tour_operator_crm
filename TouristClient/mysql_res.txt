@@ -1,0 +1,18 @@
+
+typedef struct st_mysql_res {
+  my_ulonglong  row_count;
+  MYSQL_FIELD	*fields;
+  MYSQL_DATA	*data;
+  MYSQL_ROWS	*data_cursor;
+  unsigned long *lengths;		/* column lengths of current row */
+  MYSQL		*handle;		/* for unbuffered reads */
+  const struct st_mysql_methods *methods;
+  MYSQL_ROW	row;			/* If unbuffered read */
+  MYSQL_ROW	current_row;		/* buffer to current row */
+  MEM_ROOT	field_alloc;
+  unsigned int	field_count, current_field;
+  my_bool	eof;			/* Used by mysql_fetch_row */
+  /* mysql_stmt_close() had to cancel this result */
+  my_bool       unbuffered_fetch_cancelled;  
+  void *extension;
+} MYSQL_RES;

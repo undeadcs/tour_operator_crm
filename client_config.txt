@@ -1,0 +1,17 @@
+database_host=localhost
+database_user=root
+database_password=
+database_dbname=test_client_3
+database_port=3306
+log_path=log.txt
+log_mode=wb
+server_host=127.0.0.1
+server_port=25000
+client_port=26000
+window_title=ИСУ Турист
+wndwork_min_width=800
+wndwork_min_height=600
+wndwork_max_width=1280
+wndwork_max_height=1024
+mysql_path=mysql\\bin\\mysqld.exe
+scheme=center

@@ -1,0 +1,703 @@
+gtk-icon-sizes = "gtk-menu=13,13:gtk-small-toolbar=16,16:gtk-large-toolbar=24,24:gtk-dnd=32,32"
+gtk-toolbar-icon-size = small-toolbar
+
+# disable images in buttons. i've only seen ugly delphi apps use this feature.
+gtk-button-images = 0
+
+# enable/disable images in menus. most "stock" microsoft apps don't use these, except sparingly.
+# the office apps use them heavily, though.
+gtk-menu-images = 1
+
+# use the win32 button ordering instead of the GNOME HIG one, where applicable
+gtk-alternative-button-order = 1
+
+# use the win32 sort indicators direction, as in Explorer
+gtk-alternative-sort-arrows = 1
+
+# Windows users don't expect the PC Speaker beeping at them when they backspace in an empty textview and stuff like that
+gtk-error-bell = 0
+
+style "msw-default"
+{
+  GtkWidget::interior-focus = 1
+  GtkOptionMenu::indicator-size = { 9, 5 }
+  GtkOptionMenu::indicator-spacing = { 7, 5, 2, 2 }
+  GtkSpinButton::shadow-type = in
+
+  # Owen and I disagree that these should be themable
+  #GtkUIManager::add-tearoffs = 0
+  #GtkComboBox::add-tearoffs = 0
+  
+  GtkComboBox::appears-as-list = 1
+  GtkComboBox::focus-on-click = 0
+  
+  GOComboBox::add_tearoffs = 0
+
+  #GtkTreeView::allow-rules = 0
+  GtkTreeView::expander-size = 12
+
+  GtkExpander::expander-size = 12
+
+  GtkScrolledWindow::scrollbar_spacing = 1
+
+  GtkSeparatorMenuItem::horizontal-padding = 2
+  
+  engine "wimp" 
+  {
+  }
+}
+class "*" style "msw-default"
+
+binding "ms-windows-tree-view"
+{
+  bind "Right" { "expand-collapse-cursor-row" (1,1,0) }
+  bind "Left" { "expand-collapse-cursor-row" (1,0,0) }
+}
+
+class "GtkTreeView" binding "ms-windows-tree-view"
+
+style "msw-combobox-thickness" = "msw-default"
+{
+  xthickness = 0 
+  ythickness = 0
+}
+
+widget_class "*TreeView*ComboBox*" style "msw-combobox-thickness"
+widget_class "*ComboBox*GtkFrame*" style "msw-combobox-thickness"
+
+
+#--------------------------------------------------------------------------------------------
+# кастомные стили
+
+style "widget_common_style" {
+	bg[NORMAL] = "#ffffff"
+	font_name = "Tahoma 10"
+	xthickness = 0 
+	ythickness = 0
+}
+
+class "*" style "widget_common_style"
+
+# стиль для тулбара
+style "tourist_toolbar" {
+	engine "pixmap" {
+		image {
+			function = FLAT_BOX
+			orientation = HORIZONTAL
+			file = "../../images/top_bg.png"
+		}
+	}
+}
+
+widget "*TouristToolbar" style "tourist_toolbar"
+
+# стиль для меню
+style "tourist_menu" {
+	engine "pixmap" {
+		image {
+			function = FLAT_BOX
+			orientation = VERTICAL
+			file = "../../images/left_bg.png"
+		}
+	}
+}
+
+widget "*TouristMenu" style "tourist_menu"
+
+style "tourist_menu_button" {
+	font_name = "Tahoma Bold 12"
+	
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_inactive.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_inactive_hover.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_inactive_hover.png"
+		}
+	}
+}
+
+widget "*TouristMenuButton*" style "tourist_menu_button"
+
+style "tourist_menu_button_pers_acc" {
+	fg[NORMAL] = "#ffffff"
+	fg[PRELIGHT] = "#ffffff"
+	fg[ACTIVE] = "#ffffff"
+	font_name = "Tahoma Bold 12"
+	
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_green.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_green_hover.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_green_hover.png"
+		}
+	}
+}
+
+widget "*TouristMenuPersAcc*" style "tourist_menu_button_pers_acc"
+
+style "tourist_menu_button_client" {
+	fg[NORMAL] = "#ffffff"
+	fg[PRELIGHT] = "#ffffff"
+	fg[ACTIVE] = "#ffffff"
+	font_name = "Tahoma Bold 12"
+	
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_red.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_red_hover.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_red_hover.png"
+		}
+	}
+}
+
+widget "*TouristMenuClient*" style "tourist_menu_button_client"
+
+style "tourist_menu_button_reference" {
+	# common
+	fg[NORMAL] = "#ffffff"
+	fg[PRELIGHT] = "#ffffff"
+	fg[ACTIVE] = "#ffffff"
+	font_name = "Tahoma Bold 12"
+	
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_blue.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_blue_hover.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_blue_hover.png"
+		}
+	}
+}
+
+widget "*TouristMenuReference*" style "tourist_menu_button_reference"
+
+style "tourist_tree_view" {
+	# common
+	# фон заголовка
+	#bg[NORMAL] = "#dededd"
+	#bg[ACTIVE] = "#dededd"
+	#bg[SELECTED] = "#dededd"
+	
+	# фон пустого списка и фон выбранной строки
+	base[NORMAL] = "white"
+	base[ACTIVE] = "white"
+	base[SELECTED] = "#91c8df"
+	
+	# цвет текста в ячейках
+	text[NORMAL] = "black"
+	text[ACTIVE] = "black"
+	text[SELECTED] = "black"
+	
+	# widget specific
+	GtkTreeView::allow-rules = TRUE
+	GtkTreeView::even-row-color = "#ffffff"
+	GtkTreeView::odd-row-color = "#f8f6e8"
+	#GtkTreeView::grid-line-width = 1
+	#GtkTreeView::grid-line-pattern = "\001\000\000"
+	GtkTreeView::horizontal-separator = 0
+	GtkTreeView::vertical-separator = 0
+}
+
+widget_class "*GtkTreeView*" style "tourist_tree_view"
+
+# стиль заголовка
+style "tourist_tree_view_header" {
+	# common
+	fg[NORMAL] = "black"
+	bg[NORMAL] = "#dededd"
+	bg[ACTIVE] = "#dededd"
+	bg[SELECTED] = "#dededd"
+	
+	# engine specific
+	engine "pixmap" {
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+		}
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+		}
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+		}
+	}
+}
+
+widget_class "*TreeView.GtkButton*" style "tourist_tree_view_header"
+
+# стиль полей ввода
+style "tourist_entry" {
+	# common
+	text[NORMAL] = "black"	# цвет текст
+	base[NORMAL] = "white"	# цвет фона
+}
+
+widget_class "*GtkEntry*" style "tourist_entry"
+
+# виджет выбора из списка
+
+# надпись
+style "tourist_list_pick_label" {
+	text[NORMAL] = "black"
+}
+
+widget "*TouristWgtListPickLabel*" style "tourist_list_pick_label"
+
+# кнопка
+style "ListPickButton" {
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/select.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/select.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/select.png"
+		}
+	}
+}
+
+widget "*TouristWgtListPickButton*" style "ListPickButton"
+
+style "ListPickWrap" {
+	bg[NORMAL] = "white"
+	base[NORMAL] = "white"
+	fg[NORMAL] = "black"
+}
+
+widget "*TouristWgtListPickWrap*" style "ListPickWrap"
+
+style "tourist_login_button" {
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/btn_small.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/btn_small.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/btn_small.png"
+		}
+	}
+}
+
+widget "*TouristLoginButton*" style "tourist_login_button"
+
+style "tourist_login" {
+	# common
+	bg[NORMAL] = "#efeeee"
+}
+
+widget "TouristLogin" style "tourist_login"
+
+style "tourist_login_label" {
+	# common
+	fg[NORMAL] = "#838281"
+}
+widget "*TouristLoginLabel*" style "tourist_login_label"
+
+# кнопка формы
+style "tourist_form_button" {
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/btn_med.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/btn_med.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/btn_med.png"
+		}
+	}
+}
+
+widget "*TouristFormButtonOk*" style "tourist_form_button"
+widget "*TouristFormButtonCancel*" style "tourist_form_button"
+
+style "tourist_list_filter_button" {
+	# common
+	font_name = "Tahoma Bold 12"
+	
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_inactive_small.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_inactive_hover_small.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/menu_btn_inactive_hover_small.png"
+		}
+	}
+}
+
+widget "*TouristListButtonFilter*" style "tourist_list_filter_button"
+widget "*TouristListButtonReset*" style "tourist_list_filter_button"
+
+style "tourist_list_pager_prev_frame" {
+	# common
+	font_name = "Tahoma Bold 12"
+	
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/to_start.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/to_start.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/to_start.png"
+		}
+	}
+}
+
+widget "*PagerPrevFrame*" style "tourist_list_pager_prev_frame"
+
+style "tourist_list_pager_next_frame" {
+	# common
+	font_name = "Tahoma Bold 12"
+	
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/to_end.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/to_end.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/to_end.png"
+		}
+	}
+}
+
+widget "*PagerNextFrame*" style "tourist_list_pager_next_frame"
+
+style "tourist_list_pager_prev_page" {
+	# common
+	font_name = "Tahoma Bold 12"
+	
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/prev.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/prev.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/prev.png"
+		}
+	}
+}
+
+widget "*PagerPrevPage*" style "tourist_list_pager_prev_page"
+
+style "tourist_list_pager_next_page" {
+	# common
+	font_name = "Tahoma Bold 12"
+	
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+			file = "../../images/next.png"
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+			file = "../../images/next.png"
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+			file = "../../images/next.png"
+		}
+	}
+}
+
+widget "*PagerNextPage*" style "tourist_list_pager_next_page"
+
+style "tourist_list_pager_page" {
+	# common
+	fg[NORMAL] = "#0093dd"
+	fg[PRELIGHT] = "#0093dd"
+	fg[ACTIVE] = "#0093dd"
+	fg[INSENSITIVE] = "#0093dd"
+	bg[INSENSITIVE] = "#ffffff"
+	font_name = "Tahoma 9"
+
+	GtkButton::default-border = { 0, 0, 0, 0 }
+
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+		}
+	}
+}
+
+widget "*PagerPage*" style "tourist_list_pager_page"
+
+style "tourist_list_pager_current_page" {
+	# common
+	fg[NORMAL] = "#0093dd"
+	fg[PRELIGHT] = "#0093dd"
+	fg[ACTIVE] = "#0093dd"
+	fg[INSENSITIVE] = "#0093dd"
+	bg[INSENSITIVE] = "#ffffff"
+	font_name = "Tahoma Bold 11"
+
+	GtkButton::default-border = { 0, 0, 0, 0 }
+
+	# engine specific
+	engine "pixmap" {
+		# обычное состояние
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+		}
+		# наведенное состояние
+		image {
+			function = BOX
+			state = PRELIGHT
+			border = { 0, 0, 0, 0 }
+		}
+		# нажатое состояние
+		image {
+			function = BOX
+			state = ACTIVE
+			border = { 0, 0, 0, 0 }
+		}
+	}
+}
+
+widget "*PagerCurrentPage*" style "tourist_list_pager_current_page"
+
+style "test" {
+	# common
+	# фон заголовка
+	bg[NORMAL] = "#dededd"
+	bg[ACTIVE] = "#dededd"
+	bg[SELECTED] = "#dededd"
+	
+	# фон пустого списка и фон выбранной строки
+	base[NORMAL] = "white"
+	base[ACTIVE] = "white"
+	base[SELECTED] = "#91c8df"
+	
+	# цвет текста в ячейках
+	text[NORMAL] = "black"
+	text[ACTIVE] = "black"
+	text[SELECTED] = "black"
+	
+	# widget specific
+	GtkTreeView::allow-rules = TRUE
+	GtkTreeView::even-row-color = "#ffffff"
+	GtkTreeView::odd-row-color = "#f8f6e8"
+	#GtkTreeView::grid-line-width = 1
+	#GtkTreeView::grid-line-pattern = "\001\000\000"
+	GtkTreeView::horizontal-separator = 0
+	GtkTreeView::vertical-separator = 0
+}
+
+class "GtkTreeView" style "test"
+
+style "test2" {
+	# common
+	fg[NORMAL] = "black"
+	
+	# engine specific
+	engine "pixmap" {
+		image {
+			function = BOX
+			state = NORMAL
+			border = { 0, 0, 0, 0 }
+		}
+	}
+}
+
+widget_class "*GtkTreeView.GtkButton*" style "test2"
+
